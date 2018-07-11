@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!-- I reviewed this to learn how to implement Cardview
-https://code.tutsplus.com/tutorials/getting-started-with-recyclerview-and-cardview-on-android--cms-23465 -->
-
 <android.support.v7.widget.CardView android:id="@+id/main_card_view"
                                     xmlns:android="http://schemas.android.com/apk/res/android"
                                     android:layout_width="match_parent"

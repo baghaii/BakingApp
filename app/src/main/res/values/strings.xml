@@ -1,3 +1,7 @@
 <resources>
   <string name="app_name">Baking Time</string>
+
+  <!-- fragment_steps.xml -->
+  <string name="ingredients">Ingredients</string>
+  <string name="steps">Steps</string>
 </resources>
