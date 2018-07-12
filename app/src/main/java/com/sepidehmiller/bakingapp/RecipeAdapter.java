@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.sepidehmiller.bakingapp.data.Ingredient;
 import com.sepidehmiller.bakingapp.data.Recipe;
+import com.sepidehmiller.bakingapp.data.Step;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,10 @@ import java.util.List;
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHolder> {
 
   public static final String INGREDIENTS = "Ingredients";
+  public static final String RECIPE = "RecipeName";
+  public static final String STEPS = "Steps";
+
+  private static final String TAG = "RecipeAdapter";
   private List<Recipe> mRecipes;
   Context mContext;
 
@@ -37,11 +42,11 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
       @Override
       public void onClick(View view, int i) {
         Intent intent = new Intent(parent.getContext(), RecipeActivity.class);
-
+        intent.putExtra(RECIPE, mRecipes.get(i).getName());
         intent.putParcelableArrayListExtra(INGREDIENTS,
             new ArrayList<Ingredient>(mRecipes.get(i).getIngredients()));
-
-        //TODO - Make a parcel to pass steps
+        intent.putParcelableArrayListExtra(STEPS,
+            new ArrayList<Step>(mRecipes.get(i).getSteps()));
 
         mContext.startActivity(intent);
       }

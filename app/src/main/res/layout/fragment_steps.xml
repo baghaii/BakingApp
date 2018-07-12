@@ -1,31 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:padding="@dimen/minipad">
+<android.support.v4.widget.NestedScrollView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
 
-  <TextView
+  <!-- Nested scrollview not starting at top.
+  https://stackoverflow.com/questions/33584187/nestedscrollview-wont-start-from-top -->
+
+  <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="@string/ingredients"
-    style="@style/FancyRecipeTitle"/>
+    android:orientation="vertical"
+    android:descendantFocusability="blocksDescendants"
+    android:padding="@dimen/minipad">
 
-  <TextView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/ingredients_text_view"
-    style="@style/SubTitle"/>
+    <TextView
+      android:id="@+id/ingredients_label_text_view"
+      style="@style/FancyRecipeTitle"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/ingredients"/>
 
-  <TextView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="@string/steps"
-    style="@style/FancyRecipeTitle"/>
+    <TextView
+      android:id="@+id/ingredients_text_view"
+      style="@style/SubTitle"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"/>
 
-  <android.support.v7.widget.RecyclerView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/steps_recycler_view"/>
+    <TextView
+      android:id="@+id/steps_label_text_view"
+      style="@style/FancyRecipeTitle"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/steps"/>
 
-</LinearLayout>
+    <android.support.v7.widget.RecyclerView
+      android:id="@+id/steps_recycler_view"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/colorPrimary"/>
+
+  </LinearLayout>
+</android.support.v4.widget.NestedScrollView>
