@@ -73,7 +73,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
     private TextView mServingTextView;
     private CardView mCardView;
 
-    public RecipeHolder(View itemView, RecyclerViewClickListener listener) {
+    RecipeHolder(View itemView, RecyclerViewClickListener listener) {
       super(itemView);
       mRecyclerViewClickListener = listener;
       mRecipeTextView = itemView.findViewById(R.id.recipe_text_view);
@@ -87,7 +87,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
       mRecyclerViewClickListener.onClick(v, getAdapterPosition());
     }
 
-    public void setRecipe(String recipe, String serving) {
+    void setRecipe(String recipe, String serving) {
       mRecipeTextView.setText(recipe);
       mServingTextView.setText(serving);
     }

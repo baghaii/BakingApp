@@ -70,6 +70,7 @@ public class Step implements Parcelable {
     public Step(Parcel in) {
         id = in.readInt();
         shortDescription = in.readString();
+        description = in.readString();
         videoURL = in.readString();
         thumbnailURL = in.readString();
     }
@@ -83,6 +84,7 @@ public class Step implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(getId());
         dest.writeString(getShortDescription());
+        dest.writeString(getDescription());
         dest.writeString(getVideoURL());
         dest.writeString(getThumbnailURL());
     }
