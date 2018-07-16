@@ -3,7 +3,8 @@ This project is being created for the Android Nanodegree program. The rubric
 for this project can be found [here](https://review.udacity.com/#!/rubrics/829/view).
 
 ## Features
-In this project, I am learning about Fragments and Exoplayer.
+In this project, I am learning about Fragments, ExoPlayer, the Master/Detail
+flow design pattern, Widgets, and Espresso.
 
 ## Libraries
 * [Retrofit](https://github.com/square/retrofit)
@@ -17,9 +18,10 @@ In this project, I am learning about Fragments and Exoplayer.
 ingredients and steps in one pane and the ExoPlayer and the detailed 
 instructions in the other using the [master/detail flow](https://inducesmile.com/android/android-fragment-masterdetail-flow-tutorial-in-android-studio/) design pattern.
 4. After that, it should not be difficult to create a single-fragment Activity
-called RecipeDetailActivity that loads the Detail Fragment. 
+called RecipeDetailActivity that loads the Detail Fragment for the phone 
+layout. 
 5. Once the basic app is complete, I plan to create a Widget.
-6. Finally, I plan to create some Espresso testing.
+6. Finally, I plan to do some Espresso testing.
 
 ## Attributions
 The launcher icon is made by [Smashicons](https://www.flaticon.com/authors/smashicons) from [Flaticon](https://www.flaticon.com/) and is licensed by [Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/). I modified it using [Android Asset Studio's launcher icon generator](http://romannurik.github.io/AndroidAssetStudio/icons-launcher.html).
