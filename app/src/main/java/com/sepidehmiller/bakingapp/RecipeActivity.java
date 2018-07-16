@@ -1,5 +1,6 @@
 package com.sepidehmiller.bakingapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 public class RecipeActivity extends AppCompatActivity implements RecyclerViewClickListener {
 
   public static final String STEP = "Step";
+  public static final String STEP_BUNDLE = "StepBundle";
   private StepsFragment stepsFragment;
   private PlayerFragment playerFragment;
   private View playerContainer;
@@ -72,19 +74,26 @@ public class RecipeActivity extends AppCompatActivity implements RecyclerViewCli
     Bundle bundle = new Bundle();
     bundle.putParcelable(STEP, mSteps.get(i));
 
-    PlayerFragment newPlayerFragment = new PlayerFragment();
-    newPlayerFragment.setArguments(bundle);
+    // Launch two-pane mode if you have a container for your second pane.
+    if (playerContainer != null) {
+      PlayerFragment newPlayerFragment = new PlayerFragment();
+      newPlayerFragment.setArguments(bundle);
 
-    FragmentManager fm = getSupportFragmentManager();
-    fm.beginTransaction()
-        .replace(R.id.exo_player_container, newPlayerFragment)
-        .commit();
+      FragmentManager fm = getSupportFragmentManager();
+      fm.beginTransaction()
+          .replace(R.id.exo_player_container, newPlayerFragment)
+          .commit();
+    } else {
+      Intent intent = new Intent(this, RecipeDetailActivity.class);
+      intent.putExtra(RecipeAdapter.RECIPE, getTitle());
+      intent.putExtra(STEP_BUNDLE, bundle);
+      getApplicationContext().startActivity(intent);
+    }
   }
 
   @Override
   protected void onSaveInstanceState(Bundle outState) {
     outState.putParcelableArrayList(RecipeAdapter.STEPS, mSteps);
     super.onSaveInstanceState(outState);
-
   }
 }

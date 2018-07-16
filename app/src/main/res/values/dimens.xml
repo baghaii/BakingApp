@@ -2,4 +2,5 @@
 <resources>
   <dimen name="pad">16dp</dimen>
   <dimen name="minipad">8dp</dimen>
+  <dimen name="minimargin">8dp</dimen>
 </resources>

@@ -2,6 +2,7 @@ package com.sepidehmiller.bakingapp;
 
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -21,10 +22,15 @@ import com.google.android.exoplayer2.source.ExtractorMediaSource;
 import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelector;
+import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 import com.sepidehmiller.bakingapp.data.Step;
+
+
+// This fragment is called by the RecipeActivity in tablet mode and by RecipeDetailActivity
+// on phones.
 
 public class PlayerFragment extends Fragment {
   private static final String TAG = "PlayerFragment";
@@ -55,9 +61,36 @@ public class PlayerFragment extends Fragment {
         mExoPlayerView.setVisibility(View.GONE);
       }
     }
+
     mStepTextView.setText(mStep.getDescription());
 
     return rootView;
+  }
+
+
+  /* Since we are having the manifest deal with configuration changes so the video does not
+     restart on rotation, we need to override onConfigurationChanged to change the view when it
+     is in a horizontal layout on phones.
+
+     https://developer.android.com/guide/topics/resources/runtime-changes
+
+  */
+
+  @Override
+  public void onConfigurationChanged(Configuration newConfig) {
+    super.onConfigurationChanged(newConfig);
+
+    if (newConfig.smallestScreenWidthDp < 600) {
+      if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+        mStepTextView.setVisibility(View.VISIBLE);
+        mStepTextView.setText(mStep.getDescription());
+      } else {
+        if (mExoPlayerView.getVisibility() != View.GONE) {
+          mStepTextView.setVisibility(View.GONE);
+          mExoPlayerView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FIXED_HEIGHT);
+        }
+      }
+    }
   }
 
   private void initializePlayer(Uri uri) {
