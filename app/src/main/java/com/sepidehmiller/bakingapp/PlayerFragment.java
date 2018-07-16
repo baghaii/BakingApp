@@ -26,27 +26,36 @@ import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 import com.sepidehmiller.bakingapp.data.Step;
 
-import java.util.ArrayList;
-
 public class PlayerFragment extends Fragment {
   private static final String TAG = "PlayerFragment";
   private SimpleExoPlayerView mExoPlayerView;
   private SimpleExoPlayer mExoPlayer;
   private TextView mStepTextView;
-  private ArrayList<Step> mSteps;
+  private Step mStep;
 
   @Nullable
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-    //TODO Have the descriptions update appropriately.
     View rootView = inflater.inflate(R.layout.fragment_player, container, false);
     mExoPlayerView = rootView.findViewById(R.id.player_view);
     mStepTextView = rootView.findViewById(R.id.step_description_text_view);
-    mSteps = getArguments().getParcelableArrayList(RecipeAdapter.STEPS);
-    if (mSteps != null && mSteps.size() != 0) {
-      initializePlayer(Uri.parse(mSteps.get(0).getVideoURL()));
+    mStep = getArguments().getParcelable(RecipeActivity.STEP);
+
+    if (mStep != null) {
+      String url1 = mStep.getVideoURL();
+      String url2 = mStep.getThumbnailURL();
+
+      if (!url1.isEmpty()) {
+        mExoPlayerView.setVisibility(View.VISIBLE);
+        initializePlayer(Uri.parse(url1));
+      } else if (!url2.isEmpty()) {
+        mExoPlayerView.setVisibility(View.VISIBLE);
+        initializePlayer(Uri.parse(url2));
+      } else {
+        mExoPlayerView.setVisibility(View.GONE);
+      }
     }
-    mStepTextView.setText(mSteps.get(0).getDescription());
+    mStepTextView.setText(mStep.getDescription());
 
     return rootView;
   }
@@ -89,9 +98,11 @@ public class PlayerFragment extends Fragment {
   }
 
   private void releasePlayer() {
-    mExoPlayer.stop();
-    mExoPlayer.release();
-    mExoPlayer = null;
+    if (mExoPlayer != null) {
+      mExoPlayer.stop();
+      mExoPlayer.release();
+      mExoPlayer = null;
+    }
   }
 
 }

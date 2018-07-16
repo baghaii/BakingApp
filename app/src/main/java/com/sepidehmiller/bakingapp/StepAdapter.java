@@ -1,6 +1,5 @@
 package com.sepidehmiller.bakingapp;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,29 +13,21 @@ import java.util.List;
 
 public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
 
-  private Context mContext;
   private List<Step> mSteps;
+  private RecyclerViewClickListener mListener;
 
-  public StepAdapter(Context context, List<Step> steps) {
+  public StepAdapter(List<Step> steps, RecyclerViewClickListener listener ) {
     mSteps = steps;
-    mContext = context;
+    mListener = listener;
   }
 
   @NonNull
   @Override
-  public StepHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+  public StepHolder onCreateViewHolder(@NonNull final ViewGroup parent, int viewType) {
     LayoutInflater inflater = LayoutInflater.from(parent.getContext());
     View view = inflater.inflate(R.layout.item_step, parent, false);
 
-
-    RecyclerViewClickListener listener = new RecyclerViewClickListener() {
-      @Override
-      public void onClick(View view, int i) {
-
-      }
-    };
-
-    return new StepHolder(view, listener);
+    return new StepHolder(view, mListener);
   }
 
   @Override

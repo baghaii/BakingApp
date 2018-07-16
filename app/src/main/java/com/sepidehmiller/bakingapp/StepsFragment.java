@@ -24,7 +24,24 @@ public class StepsFragment extends Fragment {
   private RecyclerView mStepsRecyclerView;
   private TextView mStepsLabelTextView;
 
+  public RecyclerViewClickListener mListener;
+
   public StepsFragment() {
+
+  }
+
+  // How do I know if a class has implemented a needed interface?
+  // https://developer.android.com/training/basics/fragments/communicating
+
+  @Override
+  public void onAttach(Context context) {
+    super.onAttach(context);
+    try {
+      mListener = (RecyclerViewClickListener) context;
+    } catch (ClassCastException e) {
+      throw new ClassCastException(context.toString()
+          + " must implement OnRecyclerViewClickListener");
+    }
 
   }
 
@@ -91,7 +108,8 @@ public class StepsFragment extends Fragment {
   private void setStepsView(Context context, ArrayList<Step> steps) {
    if (steps != null && steps.size() > 0) {
       mStepsRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-      mStepsRecyclerView.setAdapter(new StepAdapter(context, steps));
+      mStepsRecyclerView.setAdapter(new StepAdapter(steps, mListener));
+
     } else {
       mStepsLabelTextView.setVisibility(View.GONE);
     }
