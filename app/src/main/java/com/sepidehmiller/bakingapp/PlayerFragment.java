@@ -84,6 +84,7 @@ public class PlayerFragment extends Fragment {
       if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
         mStepTextView.setVisibility(View.VISIBLE);
         mStepTextView.setText(mStep.getDescription());
+        mExoPlayerView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FIT);
       } else {
         if (mExoPlayerView.getVisibility() != View.GONE) {
           mStepTextView.setVisibility(View.GONE);

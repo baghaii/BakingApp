@@ -21,11 +21,23 @@
 
     <!-- How do I keep the video from starting over when I rotate the screen -->
     <!-- https://stackoverflow.com/questions/49303165/exoplayer-resume-on-same-position-on-rotate-screen -->
-    <activity android:name=".RecipeActivity"
-              android:configChanges="orientation|screenSize|layoutDirection">
+    <activity
+      android:name=".RecipeActivity"
+      android:configChanges="orientation|screenSize|layoutDirection">
     </activity>
-    <activity android:name=".RecipeDetailActivity"
-              android:configChanges="orientation|screenSize|layoutDirection"/>
+    <activity
+      android:name=".RecipeDetailActivity"
+      android:configChanges="orientation|screenSize|layoutDirection"/>
+
+    <receiver android:name=".RecipeWidgetProvider">
+      <intent-filter>
+        <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+      </intent-filter>
+
+      <meta-data
+        android:name="android.appwidget.provider"
+        android:resource="@xml/recipe_widget_info"/>
+    </receiver>
   </application>
 
 </manifest>
