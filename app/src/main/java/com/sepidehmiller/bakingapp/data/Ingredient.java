@@ -73,4 +73,28 @@ public class Ingredient implements Parcelable {
             return new Ingredient[size];
         }
     };
+
+  @Override
+  public String toString() {
+    StringBuilder builder = new StringBuilder();
+
+    //Only include units behind the decimal if you need them.
+    if (quantity != Math.round(quantity)) {
+      builder.append(quantity.toString());
+    } else {
+      builder.append(Math.round(quantity));
+    }
+
+    builder.append(" ");
+
+    //UNIT is usually just used for eggs and does not need to specified.
+    //Ex. 3 eggs instead of 3 UNIT eggs.
+    if (!measure.contentEquals("UNIT")) {
+      builder.append(measure);
+    }
+
+    builder.append(" ");
+    builder.append(ingredient);
+    return builder.toString();
+  }
 }

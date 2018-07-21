@@ -74,31 +74,14 @@ public class StepsFragment extends Fragment {
 
       StringBuilder builder = new StringBuilder();
 
+      for (int i = 0; i < ingredients.size(); i++) {
+        builder.append(ingredients.get(i).toString());
 
-      for (Ingredient ingredient : ingredients) {
-        Double quantity = ingredient.getQuantity();
-
-        //Only include units behind the decimal if you need them.
-        if (quantity != Math.round(quantity)) {
-          builder.append(quantity.toString());
-        } else {
-          builder.append(Math.round(quantity));
+        if (i < ingredients.size() - 1) {
+          builder.append("\n");
         }
-
-        builder.append(" ");
-
-        //UNIT is usually just used for eggs and does not need to specified.
-        //Ex. 3 eggs instead of 3 UNIT eggs.
-        if (!ingredient.getMeasure().contentEquals("UNIT")) {
-          builder.append(ingredient.getMeasure());
-        }
-
-        builder.append(" ");
-        builder.append(ingredient.getIngredient());
-        builder.append("\n");
       }
-
-      String ingredientString = builder.toString().trim();
+      String ingredientString = builder.toString();
       mIngredientsTextView.setText(ingredientString);
     } else {
       mIngredientsLabelTextView.setVisibility(View.GONE);
