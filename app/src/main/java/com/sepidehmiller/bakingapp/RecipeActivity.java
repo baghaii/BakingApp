@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Toast;
 
 import com.sepidehmiller.bakingapp.data.Ingredient;
 import com.sepidehmiller.bakingapp.data.Step;
@@ -106,7 +105,7 @@ public class RecipeActivity extends AppCompatActivity implements RecyclerViewCli
   @Override
   public void onClick(View view, int i) {
 
-    Toast.makeText(this, String.valueOf(i), Toast.LENGTH_LONG).show();
+    //Toast.makeText(this, String.valueOf(i), Toast.LENGTH_LONG).show();
     Bundle bundle = new Bundle();
     bundle.putParcelable(STEP, mSteps.get(i));
 
