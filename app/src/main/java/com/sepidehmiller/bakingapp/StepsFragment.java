@@ -55,15 +55,18 @@ public class StepsFragment extends Fragment {
     /* How do I pass data to Fragments?
     http://www.androhub.com/android-pass-data-from-activity-to-fragment/ */
 
-    ArrayList<Ingredient> ingredients = getArguments().getParcelableArrayList(RecipeAdapter.INGREDIENTS);
-    setIngredientsView(ingredients);
+    if (getArguments() != null && getArguments().containsKey(RecipeAdapter.INGREDIENTS)) {
+      ArrayList<Ingredient> ingredients = getArguments().getParcelableArrayList(RecipeAdapter.INGREDIENTS);
+      setIngredientsView(ingredients);
+    }
 
     mStepsLabelTextView = rootView.findViewById(R.id.steps_label_text_view);
     mStepsRecyclerView = rootView.findViewById(R.id.steps_recycler_view);
 
-    ArrayList<Step> steps = getArguments().getParcelableArrayList(RecipeAdapter.STEPS);
-
-    setStepsView(container.getContext(), steps);
+    if (getArguments() != null && getArguments().containsKey(RecipeAdapter.STEPS)) {
+      ArrayList<Step> steps = getArguments().getParcelableArrayList(RecipeAdapter.STEPS);
+      setStepsView(container.getContext(), steps);
+    }
 
     return rootView;
 

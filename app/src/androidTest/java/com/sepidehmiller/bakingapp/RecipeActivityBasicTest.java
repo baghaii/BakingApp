@@ -1,5 +1,6 @@
 package com.sepidehmiller.bakingapp;
 
+import android.content.Intent;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.v7.widget.Toolbar;
@@ -17,19 +18,21 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.core.AllOf.allOf;
 
 @RunWith(AndroidJUnit4.class)
-public class MainActivityBasicTest {
+public class RecipeActivityBasicTest {
 
+  // http://www.vogella.com/tutorials/AndroidTestingEspresso/article.html
   @Rule
-  public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
+  public ActivityTestRule<RecipeActivity> rule = new ActivityTestRule<>(RecipeActivity.class,
+      true, false);
 
-  // http://blog.sqisland.com/2015/05/espresso-match-toolbar-title.html
   @Test
-  public void checkTitle() {
+  public void demonstrateIntentTitleSetting() {
+    Intent intent = new Intent();
+    intent.putExtra(RecipeAdapter.RECIPE, "Nutella Pie");
+    rule.launchActivity(intent);
     onView(allOf(
         isAssignableFrom(TextView.class),
         withParent(isAssignableFrom(Toolbar.class))))
-        .check(matches(withText("Baking Time")));
-
+        .check(matches(withText("Nutella Pie")));
   }
-
 }
